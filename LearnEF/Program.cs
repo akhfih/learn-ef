@@ -13,6 +13,11 @@ public class Program
         Console.WriteLine($"Customer: Id{customer.Id}, Name: {customer.CustomerName}, " + "" +
                           $"Mobile Phone: {customer.MobilePhone}, Email: {customer.MobilePhone}");
         
+        // get by name
+        var customerByName = context.Customers.FirstOrDefault(customer => customer.CustomerName.ToLower().Equals("fikron".ToLower()));
+        Console.WriteLine($"Customer: Id{customerByName.Id}, Name: {customerByName.CustomerName}, " + "" +
+                          $"Mobile Phone: {customerByName.MobilePhone}, Email: {customerByName.MobilePhone}");
+        
         Console.WriteLine(context.Entry(customer).State);
 
         // get all
