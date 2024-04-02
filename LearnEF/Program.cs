@@ -16,7 +16,7 @@ public class Program
         Console.WriteLine(context.Entry(customer).State);*/
         
         // get by name
-        var customerByName = context.Customers.FirstOrDefault(customer => customer.CustomerName.ToLower().Equals("akhmad".ToLower()));
+        var customerByName = context.Customers.FirstOrDefault(customer => customer.CustomerName.ToLower().Equals("andik".ToLower()));
         Console.WriteLine($"Customer: Id{customerByName.Id}, Name: {customerByName.CustomerName}, " + "" +
                           $"Mobile Phone: {customerByName.MobilePhone}, Email: {customerByName.MobilePhone}");
         
@@ -31,6 +31,10 @@ public class Program
                               $"Mobile Phone: {c.MobilePhone}, Email: {c.MobilePhone}");
         }
         
+        //remove
+        context.Customers.Remove(customerByName);
+        context.SaveChanges();
+
         // update
         /*Customer akhmad = new()
         {
@@ -41,9 +45,9 @@ public class Program
             Email = "huda@gmail.com",
         };*/
         //untuk update find by dulu
-        customerByName.CustomerName = "andik";
+        /*customerByName.CustomerName = "andik";
         context.Customers.Update(customerByName);
-        context.SaveChanges();
+        context.SaveChanges();*/
 
         // create
         /*Customer newCustomer = new()
