@@ -15,3 +15,10 @@ dotnet ef migrations add Initial
 dotnet ef database update
 ```
 
+## Entity State
+- Added
+- Detached
+- Unchanged
+- Modified
+- Deleted
+
