@@ -6,8 +6,8 @@ namespace LearnEF.Entities;
 [Table(name:"m_customer")]
 public class Customer
 {
-    [Key, Column(name:"id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
+    [Key, Column(name:"id")]
+    public Guid Id { get; set; }
 
     [Column(name:"customer_name", TypeName = "NVarchar(50)"), Required]
     public string CustomerName { get; set; }

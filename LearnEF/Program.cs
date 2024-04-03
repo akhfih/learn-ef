@@ -6,14 +6,32 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        using AppDbContext context = new();
+        AppDbContext context = new();
+        IRepository<Customer> repository = new Repository<Customer>(context);
+
+        Customer fikron = new()
+        {
+            CustomerName = "Fikron",
+            Address = "Brebes",
+            MobilePhone = "085729332881",
+            Email = "fikron@email.com"
+        };
+
+        // repository.Save(fikron);
+        // var customer = repository.FindById(Guid.Parse("FAAD0A90-F392-4DAD-40B7-08DC53AEA93F"));
+        var customer = repository.FindBy(c => c.CustomerName.Equals("Fikron"));
+        Console.WriteLine(customer.CustomerName);
+    }
+}
+
+        /*using AppDbContext context = new();
 
         // get by id
         /*var customer = context.Customers.FirstOrDefault(customer => customer.Id.Equals(1));
         Console.WriteLine($"Customer: Id{customer.Id}, Name: {customer.CustomerName}, " + "" +
                           $"Mobile Phone: {customer.MobilePhone}, Email: {customer.MobilePhone}");
         
-        Console.WriteLine(context.Entry(customer).State);*/
+        Console.WriteLine(context.Entry(customer).State);#1#
         
         // get by name
         var customerByName = context.Customers.FirstOrDefault(customer => customer.CustomerName.ToLower().Equals("andik".ToLower()));
@@ -43,11 +61,11 @@ public class Program
             Address = "JL. H. Dahlan",
             MobilePhone = "12345678",
             Email = "huda@gmail.com",
-        };*/
+        };#1#
         //untuk update find by dulu
         /*customerByName.CustomerName = "andik";
         context.Customers.Update(customerByName);
-        context.SaveChanges();*/
+        context.SaveChanges();#1#
 
         // create
         /*Customer newCustomer = new()
@@ -60,6 +78,4 @@ public class Program
         };
 
         context.Customers.Add(newCustomer);
-        context.SaveChanges();*/
-    }
-}
+        context.SaveChanges();#1#*/

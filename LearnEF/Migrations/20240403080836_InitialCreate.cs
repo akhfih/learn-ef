@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -14,8 +15,7 @@ namespace LearnEF.Migrations
                 name: "m_customer",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     customer_name = table.Column<string>(type: "NVarchar(50)", nullable: false),
                     address = table.Column<string>(type: "NVarchar(250)", nullable: false),
                     mobile_phone = table.Column<string>(type: "NVarchar(14)", nullable: false),
