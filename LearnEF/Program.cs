@@ -10,20 +10,56 @@ public class Program
         IRepository<Customer> repository = new Repository<Customer>(context);
         IRepository<Product> proRepository = new Repository<Product>(context);
 
-        Product nabati = new Product
+        //Transaction Insert
+        /*var transaction = context.Database.BeginTransaction();
+
+        try
+        {
+            var purchase = new Purchase
+            {
+                TransDate = DateTime.Now,
+                CustomerId = Guid.Parse("d038b78b-22c3-4566-0b9b-08dc543caec4"),
+                PurchaseDetails = new List<PurchaseDetail>
+                {
+                    new() {ProductId = Guid.Parse("2e100fc2-a888-42dd-7ac2-08dc5441dcde"), Qty = 2,},
+                    new() {ProductId = Guid.Parse("22b0165a-b3b9-4728-7ac3-08dc5441dcde"), Qty = 1,},
+                }
+            };
+            context.Purchases.Add(purchase);
+            context.SaveChanges();
+
+            foreach (var purchaseDetail in purchase.PurchaseDetails)
+            {
+                var product = context.Products.FirstOrDefault(product => product.Id.Equals(purchaseDetail.ProductId));
+                if (product != null) product.Stock -= purchaseDetail.Qty;
+            }
+
+            context.SaveChanges();
+            transaction.Commit();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            transaction.Rollback();
+            throw;
+        }*/
+    }
+}
+
+        /*Product nabati = new Product
         {
             ProductName = "Rich Rich Nabati",
             ProductPrice = 3000,
             Stock = 15
         };
-        
+                
         Product tongo = new Product
         {
             ProductName = "Tongo Coklat",
             ProductPrice = 5000,
             Stock = 10
         };
-        
+                
         Product nextmonth = new Product
         {
             ProductName = "Nextmont",
@@ -33,13 +69,7 @@ public class Program
 
         proRepository.Save(nabati);
         proRepository.Save(tongo);
-        proRepository.Save(nextmonth);
-
-
-
-
-    }
-}
+        proRepository.Save(nextmonth);*/
 
         // Customer fikron = new()
         // {
