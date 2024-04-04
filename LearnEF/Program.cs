@@ -1,6 +1,7 @@
 ﻿
 using LearnEF.Entities;
 using LearnEF.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 public class Program
 {
@@ -9,6 +10,22 @@ public class Program
         AppDbContext context = new();
         IRepository<Customer> repository = new Repository<Customer>(context);
         IRepository<Product> proRepository = new Repository<Product>(context);
+
+        var purchase = context.Purchases
+                // .Include(purchase => purchase.Customer)
+                .Include("Customer")
+                // .Include(p=>p.PurchaseDetails)
+                // .ThenInclude(pd=>pd.Product)
+                .Include("PurchaseDetails.Product")
+                .FirstOrDefault(p=>p.Id.Equals(Guid.Parse("9a48280e-57ed-47a3-de54-08dc547ad166")));
+        Console.WriteLine(purchase);
+        
+        /*
+         * "SELECT * FROM t_purchase tp
+         * JOIN m_customer mc ON mc.id = tp.customer_id
+         * JOIN t_purchase_detail tpd ON tpd.purchase_id = tp.id
+         * JOIN m_product mp ON mp.id = tpd.purchase_id"
+         */
 
         //Transaction Insert
         /*var transaction = context.Database.BeginTransaction();
