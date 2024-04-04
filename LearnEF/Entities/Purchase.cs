@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LearnEF.Entities;
 
+[Table(name:"t_purchase")]
 public class Purchase
 {
     [Key, Column(name: "id")]
@@ -13,5 +14,6 @@ public class Purchase
     public Guid CustomerId { get; set; }
     
     public virtual Customer Customer { get; set; }
+    
     public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
 }

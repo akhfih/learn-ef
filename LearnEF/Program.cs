@@ -8,21 +8,55 @@ public class Program
     {
         AppDbContext context = new();
         IRepository<Customer> repository = new Repository<Customer>(context);
+        IRepository<Product> proRepository = new Repository<Product>(context);
 
-        Customer fikron = new()
+        Product nabati = new Product
         {
-            CustomerName = "Fikron",
-            Address = "Brebes",
-            MobilePhone = "085729332881",
-            Email = "fikron@email.com"
+            ProductName = "Rich Rich Nabati",
+            ProductPrice = 3000,
+            Stock = 15
+        };
+        
+        Product tongo = new Product
+        {
+            ProductName = "Tongo Coklat",
+            ProductPrice = 5000,
+            Stock = 10
+        };
+        
+        Product nextmonth = new Product
+        {
+            ProductName = "Nextmont",
+            ProductPrice = 4000,
+            Stock = 5
         };
 
-        // repository.Save(fikron);
-        // var customer = repository.FindById(Guid.Parse("FAAD0A90-F392-4DAD-40B7-08DC53AEA93F"));
-        var customer = repository.FindBy(c => c.CustomerName.Equals("Fikron"));
-        Console.WriteLine(customer.CustomerName);
+        proRepository.Save(nabati);
+        proRepository.Save(tongo);
+        proRepository.Save(nextmonth);
+
+
+
+
     }
 }
+
+        // Customer fikron = new()
+        // {
+        //     CustomerName = "Fikron",
+        //     Address = "Brebes",
+        //     MobilePhone = "085729332881",
+        //     Email = "fikron@email.com"
+        // };
+        //
+        //  repository.Save(fikron);
+        // var customer = repository.FindById(Guid.Parse("FAAD0A90-F392-4DAD-40B7-08DC53AEA93F"));
+        /*var customer = repository.FindBy(c => c.CustomerName.Equals("Fikron"));
+        Console.WriteLine(customer.CustomerName);*/
+
+
+
+
 
         /*using AppDbContext context = new();
 

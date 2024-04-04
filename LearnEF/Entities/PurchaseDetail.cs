@@ -11,11 +11,13 @@ public class PurchaseDetail
     
     [Column(name:"purchase_id")]
     public Guid PurchaseId { get; set; }
+    
     [Column(name:"product_id")]
     public Guid ProductId { get; set; }
+    
     [Column(name:"qty")]
     public int Qty { get; set; }
 
-    public Purchase Purchase { get; set; }
-    public Purchase Product { get; set; }
+    public virtual Purchase Purchase { get; set; }
+    public virtual Product Product { get; set; }
 }
