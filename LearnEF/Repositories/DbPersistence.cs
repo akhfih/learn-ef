@@ -21,7 +21,7 @@ public class DbPersistence : IPersistence
 
     public void Commit()
     {
-        _appDbContext.Database.BeginTransaction();
+        _appDbContext.Database.CommitTransaction();
     }
 
     public void Rollback()

@@ -1,6 +1,7 @@
 ﻿
 using LearnEF.Entities;
 using LearnEF.Repositories;
+using LearnEF.Services;
 using Microsoft.EntityFrameworkCore;
 
 public class Program
@@ -8,7 +9,36 @@ public class Program
     public static void Main(string[] args)
     {
         AppDbContext context = new();
-        IRepository<Customer> repository = new Repository<Customer>(context);
+
+        IRepository<Purchase> repository = new Repository<Purchase>(context);
+        IRepository<Product> repositoryProduct = new Repository<Product>(context);
+        IPersistence persistence = new DbPersistence(context);
+        IProductService productService = new ProductService(repositoryProduct, persistence);
+        IPurchaseService purchaseService = new PurchaseService(repository, persistence, productService);
+
+        var purchase = new Purchase
+        {
+            TransDate = DateTime.Now,
+            CustomerId = Guid.Parse("d038b78b-22c3-4566-0b9b-08dc543caec4"),
+            PurchaseDetails = new List<PurchaseDetail>()
+            {
+                new() {ProductId = Guid.Parse("2e100fc2-a888-42dd-7ac2-08dc5441dcde"), Qty = 2,},
+                new() {ProductId = Guid.Parse("22b0165a-b3b9-4728-7ac3-08dc5441dcde"), Qty = 1,},
+            }
+        };  
+
+        purchaseService.CreateNewTransaction(purchase);
+
+
+
+
+
+
+
+
+
+
+        /*IRepository<Customer> repository = new Repository<Customer>(context);
         IRepository<Product> proRepository = new Repository<Product>(context);
 
         var purchase = context.Purchases
@@ -18,8 +48,8 @@ public class Program
                 // .ThenInclude(pd=>pd.Product)
                 .Include("PurchaseDetails.Product")
                 .FirstOrDefault(p=>p.Id.Equals(Guid.Parse("9a48280e-57ed-47a3-de54-08dc547ad166")));
-        Console.WriteLine(purchase);
-        
+        Console.WriteLine(purchase);*/
+
         /*
          * "SELECT * FROM t_purchase tp
          * JOIN m_customer mc ON mc.id = tp.customer_id
